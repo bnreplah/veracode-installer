@@ -89,6 +89,7 @@ install_veracode_cli(){
 while [[ $# -gt 0 ]]; do
         case "$1" in
             --installer-menu)
+                help
                 shift 1
                 ;;
             --install-sca-ci)
@@ -98,9 +99,10 @@ while [[ $# -gt 0 ]]; do
                 ;;
             --install-sca-cli)
                 curl -sSL https://download.sourceclear.com/install | sh
+                export CACHE_DIR="$2"
                 echo "Run Srcclr Activate and enter the token provided"
                 srcclr activate
-                shift 1
+                shift 2
                 ;;
             --force-install-vccli-local)
                 curl -fsS https://tools.veracode.com/veracode-cli/install | sh
@@ -124,7 +126,7 @@ while [[ $# -gt 0 ]]; do
                     chmod 755 VeracodeJavaAPI.jar
                     echo '[INFO] SUCCESSFULLY DOWNLOADED WRAPPER'
                 else
-                    echo '[ERROR] DOWNLOAD FAILED'122w
+                    echo '[ERROR] DOWNLOAD FAILED'
                     exit 1
                 fi
                 shift 1
